@@ -47,6 +47,7 @@ a:focus-visible,button:focus-visible{outline:3px solid #A35C3A;outline-offset:3p
 .site blockquote{font-size:0.95rem !important}
 .site .site-brand{font-size:1.05rem !important}
 }
+@media (max-width: 300px){.site-brand{font-size:0.98rem !important;white-space:nowrap}.site-cta{padding:9px 14px !important;font-size:0.9rem !important}}
 .contact-actions{display:flex;flex-direction:column;align-items:flex-end;gap:12px}
 @media (max-width: 860px){.contact-actions{align-items:flex-start}}
 @media (max-width: 600px){.contact-actions{display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%}.contact-actions a{width:auto !important;min-height:56px !important;padding:10px 12px !important;gap:8px !important;justify-content:center;text-align:center;font-size:0.9rem !important;line-height:1.25}.contact-actions a svg{flex:0 0 auto}.lbl-full{display:none}.lbl-short{display:inline !important}}
