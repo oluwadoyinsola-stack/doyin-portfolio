@@ -68,3 +68,19 @@ a:focus-visible,button:focus-visible{outline:3px solid #A35C3A;outline-offset:3p
 @media (prefers-reduced-motion: reduce){.slide-track{transition:none !important}}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+
+/* Scroll-to-footer nudge */
+.nudge{position:fixed;right:24px;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:50;width:min(360px,calc(100vw - 32px));box-sizing:border-box;background:#FFFFFF;color:#111111;border:1px solid #D3CCCA;border-radius:24px;padding:22px 22px 20px;box-shadow:0 18px 48px rgba(17,17,17,.35);font-family:'Inter','Segoe UI',system-ui,sans-serif;opacity:0;transform:translateY(16px) scale(.98);transition:opacity .35s ease,transform .45s cubic-bezier(.2,.7,.2,1)}
+.nudge.is-visible{opacity:1;transform:none}
+.nudge[hidden]{display:none}
+.nudge-eyebrow{margin:0 0 6px;font-weight:700;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;color:#A35C3A}
+.nudge-title{margin:0 36px 16px 0;font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:1.3rem;line-height:1.25;color:#111111}
+.nudge-actions{display:flex;flex-wrap:wrap;gap:10px}
+.nudge-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid #111111;color:#111111 !important;font-weight:700;font-size:.92rem;text-decoration:none;transition:background .2s ease}
+.nudge-btn:hover{background:#EDE5E4}
+.nudge-btn--primary{background:#A35C3A;border-color:#A35C3A;color:#FFFFFF !important}
+.nudge-btn--primary:hover{background:#8C4D30 !important}
+.nudge-close{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:999px;border:0;background:transparent;color:#4A4644;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.nudge-close:hover{background:#EDE5E4;color:#111111}
+@media (max-width: 600px){.nudge{left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:auto}.nudge-title{font-size:1.15rem}}
+@media (prefers-reduced-motion: reduce){.nudge{transition:none;transform:none}}

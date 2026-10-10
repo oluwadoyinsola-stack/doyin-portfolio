@@ -145,10 +145,58 @@
     });
   }
 
+
+  /* ---------------------------------------------------------------
+   * 5. Scroll-to-footer nudge
+   *    Appears once when the footer comes into view. Closes with the
+   *    X button or Escape, and stays closed for the rest of the visit.
+   * ------------------------------------------------------------- */
+  function initScrollNudge() {
+    var nudge = document.getElementById('scroll-nudge');
+    var footer = document.querySelector('footer');
+    if (!nudge || !footer || !('IntersectionObserver' in window)) return;
+
+    var KEY = 'nudge-dismissed';
+    try { if (sessionStorage.getItem(KEY)) return; } catch (e) {}
+
+    var shown = false;
+
+    function show() {
+      if (shown) return;
+      shown = true;
+      nudge.hidden = false;
+      // Let the browser paint it hidden first so the entrance animates.
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { nudge.classList.add('is-visible'); });
+      });
+    }
+
+    function hide() {
+      nudge.classList.remove('is-visible');
+      try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
+      setTimeout(function () { nudge.hidden = true; }, reduceMotion ? 0 : 350);
+      document.removeEventListener('keydown', onKey);
+    }
+
+    function onKey(e) { if (e.key === 'Escape' && shown) hide(); }
+
+    var io = new IntersectionObserver(function (entries) {
+      if (entries.some(function (en) { return en.isIntersecting; })) {
+        show();
+        io.disconnect();
+      }
+    }, { threshold: 0.5 });
+    io.observe(footer);
+
+    nudge.querySelector('[data-nudge-close]').addEventListener('click', hide);
+    document.addEventListener('keydown', onKey);
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initRotatingWord();
     initSlideshow();
     initMoreProjects();
     initSkillsToggle();
+    initScrollNudge();
   });
 })();
